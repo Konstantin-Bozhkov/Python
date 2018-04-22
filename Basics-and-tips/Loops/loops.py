@@ -30,3 +30,7 @@ print( [i**2 for i in nums] );
 #you can even add some conditions
 print( [i**2 for i in nums if i % 2] );
 print( [i**2 for i in nums if i > 2] );
+
+"""
+dasdsadas
+"""
