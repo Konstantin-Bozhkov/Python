@@ -67,11 +67,43 @@ def hand_score(hand):
     score += min([aces,1]) * (1 if score >= 11 else 11); 
     return score;
 
+def deal_card(shoe):
+    """
+    >>> deal_card([2,3,4,5,6,7,8,9,10]);
+    ([10, 9], [8]) #tupel
+    """
+    # take out 2 cards for the player and one for the dealer
+    return [shoe.pop() for i in range(2)], [shoe.pop()];
+
+
+def ask_for_bet(balance,min_bet):
+    """
+    Ask the player to bet some amount
+    """
+    while True:
+        say("How much would you want to wager this time?");
+        try:
+            bet = input("I want to bet "); # Expect console user input.Display the message inside the brackets;
+            bet = float(bet);
+            if bet > balance:
+                say("You don't have enough money on your account");
+            elif bet < 0:
+                say("Negative bets are not allowed you... cheater");
+            elif bet < min_bet:
+                say("Bet must be above %s" % min_bet);
+            else:
+                balance -= bet;
+                say("Bet of %.2f accepted!" % bet);
+                return bet,balance;
+        except ValueError as e:
+            say("%s is not a valid bet! Please enter a floating point number." % bet);
+
 # If not main file dont run;
 # Main function similar to C#
 if __name__ == "__main":
     say_welcome();
     init_shoe(5);
+    ask_for_bet(100,10);
      
     
  
